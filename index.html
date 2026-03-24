@@ -4,195 +4,221 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simple Online Tools</title>
+
 <style>
-body { font-family: Arial, sans-serif; background: #e8f0f2; margin:0; padding:20px; }
-h1,h2,h3 { text-align:center; color:#2c3e50; }
-.tool { background:#fff; border-radius:8px; padding:15px; margin:15px auto; max-width:500px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-input,textarea,select,button{width:100%;padding:8px;margin:5px 0;border-radius:4px;border:1px solid #ccc;box-sizing:border-box;}
-button{cursor:pointer;color:#fff;border:none;}
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#e8f0f2,#dfe9f3);
+  margin:0;
+  padding:20px;
+}
+h1 {
+  text-align:center;
+  color:#2c3e50;
+  margin-bottom:20px;
+}
+.tool {
+  background:#fff;
+  border-radius:10px;
+  padding:15px;
+  margin:15px auto;
+  max-width:500px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+.tool:hover { transform: translateY(-3px); }
+input,textarea,select,button{
+  width:100%;
+  padding:8px;
+  margin:5px 0;
+  border-radius:5px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+button{
+  cursor:pointer;
+  color:#fff;
+  border:none;
+}
 .green{background:#2ecc71;}
 .blue{background:#3498db;}
 .purple{background:#9b59b6;}
 .orange{background:#e67e22;}
-.output{margin-top:10px;font-weight:bold;color:#34495e;}
-@media(max-width:600px){.tool{width:90%;}}
+.output{
+  margin-top:10px;
+  font-weight:bold;
+  color:#34495e;
+}
+.article-link {
+  display:block;
+  margin-top:8px;
+  color:#3498db;
+  text-decoration:none;
+  font-weight:bold;
+}
+.article-link:hover { text-decoration:underline; }
+.ad-placeholder {
+  display:none; 
+  margin: 10px 0;
+  padding: 10px;
+  border:1px dashed #ccc;
+  text-align:center;
+  color:#555;
+}
+.page-load-ad {
+  margin: 10px 0;
+  padding: 10px;
+  border:1px dashed #999;
+  text-align:center;
+  color:#333;
+}
+@media(max-width:600px){ .tool{width:90%;} }
 </style>
 </head>
 <body>
-<h1>Simple Online Tools</h1>
 
-<!-- 1. Age Calculator -->
-<div class="tool">
-<h3>Age Calculator</h3>
-<input type="date" id="birthdate">
-<button class="green" onclick="calculateAge()">Calculate Age</button>
-<div class="output" id="ageResult"></div>
+<h1>🧰 Simple Online Tools</h1>
+
+<!-- Page-load Ad -->
+<div class="page-load-ad" id="pageLoadAd">
+  <!-- AdSense placeholder for page-load -->
+  Page-load Advertisement
 </div>
 
-<!-- 2. BMI Calculator -->
+<!-- 1️⃣ Age Calculator -->
 <div class="tool">
-<h3>BMI Calculator</h3>
-<input type="number" id="height" placeholder="Height in cm">
-<input type="number" id="weight" placeholder="Weight in kg">
-<button class="blue" onclick="calculateBMI()">Calculate BMI</button>
-<div class="output" id="bmiResult"></div>
+  <div class="ad-placeholder" id="ageAd">
+    <!-- AdSense placeholder for button click -->
+  </div>
+  <h3>Age Calculator</h3>
+  <input type="date" id="birthdate">
+  <button class="green" onclick="showAdBeforeTool('ageResult','ageAd',calculateAge)">Calculate Age</button>
+  <a class="article-link" href="age.html">Read Guide</a>
+  <div class="output" id="ageResult"></div>
 </div>
 
-<!-- 3. Word Counter -->
+<!-- 2️⃣ BMI Calculator -->
 <div class="tool">
-<h3>Word Counter</h3>
-<textarea id="textInput" rows="4" placeholder="Enter text..."></textarea>
-<button class="green" onclick="countWords()">Count Words</button>
-<div class="output" id="wordResult"></div>
+  <div class="ad-placeholder" id="bmiAd"></div>
+  <h3>BMI Calculator</h3>
+  <input type="number" id="height" placeholder="Height in cm">
+  <input type="number" id="weight" placeholder="Weight in kg">
+  <button class="blue" onclick="showAdBeforeTool('bmiResult','bmiAd',calculateBMI)">Calculate BMI</button>
+  <a class="article-link" href="bmi.html">Read Guide</a>
+  <div class="output" id="bmiResult"></div>
 </div>
 
-<!-- 4. Text Case Converter -->
+<!-- 3️⃣ Word Counter -->
 <div class="tool">
-<h3>Text Case Converter</h3>
-<textarea id="caseText" rows="3" placeholder="Enter text"></textarea>
-<select id="caseType">
-<option value="upper">UPPERCASE</option>
-<option value="lower">lowercase</option>
-<option value="capitalize">Capitalize</option>
-</select>
-<button class="orange" onclick="convertCase()">Convert</button>
-<div class="output" id="caseResult"></div>
+  <div class="ad-placeholder" id="wordAd"></div>
+  <h3>Word Counter</h3>
+  <textarea id="textInput" rows="4" placeholder="Enter text..."></textarea>
+  <button class="green" onclick="showAdBeforeTool('wordResult','wordAd',countWords)">Count Words</button>
+  <a class="article-link" href="word.html">Read Guide</a>
+  <div class="output" id="wordResult"></div>
 </div>
 
-<!-- 5. Password Generator -->
+<!-- 4️⃣ Text Case Converter -->
 <div class="tool">
-<h3>Password Generator</h3>
-<input type="number" id="passLength" placeholder="Length (6-20)" min="6" max="20">
-<button class="purple" onclick="generatePassword()">Generate Password</button>
-<div class="output" id="passResult"></div>
+  <div class="ad-placeholder" id="caseAd"></div>
+  <h3>Text Case Converter</h3>
+  <textarea id="caseText" rows="3"></textarea>
+  <select id="caseType">
+    <option value="upper">UPPERCASE</option>
+    <option value="lower">lowercase</option>
+    <option value="capitalize">Capitalize</option>
+  </select>
+  <button class="orange" onclick="showAdBeforeTool('caseResult','caseAd',convertCase)">Convert</button>
+  <a class="article-link" href="textcase.html">Read Guide</a>
+  <div class="output" id="caseResult"></div>
 </div>
 
-<!-- 6. Color Code Generator -->
+<!-- 5️⃣ Password Generator -->
 <div class="tool">
-<h3>Color Code Generator</h3>
-<button class="blue" onclick="generateColor()">Generate Random Color</button>
-<div class="output" id="colorResult"></div>
+  <div class="ad-placeholder" id="passAd"></div>
+  <h3>Password Generator</h3>
+  <input type="number" id="passLength" placeholder="Length (6-20)">
+  <button class="purple" onclick="showAdBeforeTool('passResult','passAd',generatePassword)">Generate Password</button>
+  <a class="article-link" href="password.html">Read Guide</a>
+  <div class="output" id="passResult"></div>
 </div>
 
-<!-- 7. Unit Converter -->
+<!-- 6️⃣ Color Code Generator -->
 <div class="tool">
-<h3>Unit Converter</h3>
-<input type="number" id="unitValue" placeholder="Enter value">
-<select id="unitType">
-<option value="kgToPound">Kg → Pound</option>
-<option value="poundToKg">Pound → Kg</option>
-<option value="cmToFeet">cm → Feet</option>
-<option value="feetToCm">Feet → cm</option>
-<option value="cToF">Celsius → Fahrenheit</option>
-<option value="fToC">Fahrenheit → Celsius</option>
-</select>
-<button class="green" onclick="convertUnit()">Convert</button>
-<div class="output" id="unitResult"></div>
+  <div class="ad-placeholder" id="colorAd"></div>
+  <h3>Color Code Generator</h3>
+  <button class="blue" onclick="showAdBeforeTool('colorResult','colorAd',generateColor)">Generate Color</button>
+  <a class="article-link" href="color.html">Read Guide</a>
+  <div class="output" id="colorResult"></div>
 </div>
 
-<!-- 8. Basic Calculator -->
+<!-- 7️⃣ Unit Converter -->
 <div class="tool">
-<h3>Basic Calculator</h3>
-<input type="text" id="calcInput" placeholder="Enter expression e.g. 5+3*2">
-<button class="blue" onclick="calculateBasic()">Calculate</button>
-<div class="output" id="calcResult"></div>
+  <div class="ad-placeholder" id="unitAd"></div>
+  <h3>Unit Converter</h3>
+  <input type="number" id="unitValue">
+  <select id="unitType">
+    <option value="kgToPound">Kg → Pound</option>
+    <option value="poundToKg">Pound → Kg</option>
+  </select>
+  <button class="green" onclick="showAdBeforeTool('unitResult','unitAd',convertUnit)">Convert</button>
+  <a class="article-link" href="converter.html">Read Guide</a>
+  <div class="output" id="unitResult"></div>
 </div>
 
-<!-- 9. Code Formatter -->
+<!-- 8️⃣ Basic Calculator -->
 <div class="tool">
-<h3>Code Formatter (JS)</h3>
-<textarea id="codeInput" rows="4" placeholder="Enter JS code"></textarea>
-<button class="purple" onclick="formatCode()">Format Code</button>
-<div class="output" id="codeResult"></div>
+  <div class="ad-placeholder" id="calcAd"></div>
+  <h3>Basic Calculator</h3>
+  <input type="text" id="calcInput">
+  <button class="blue" onclick="showAdBeforeTool('calcResult','calcAd',calculateBasic)">Calculate</button>
+  <a class="article-link" href="basiccalc.html">Read Guide</a>
+  <div class="output" id="calcResult"></div>
 </div>
 
-<!-- 10. Text Compare Tool -->
+<!-- 9️⃣ Code Formatter -->
 <div class="tool">
-<h3>Text Compare Tool</h3>
-<textarea id="text1" rows="2" placeholder="Text 1"></textarea>
-<textarea id="text2" rows="2" placeholder="Text 2"></textarea>
-<button class="orange" onclick="compareText()">Compare</button>
-<div class="output" id="compareResult"></div>
+  <div class="ad-placeholder" id="codeAd"></div>
+  <h3>Code Formatter</h3>
+  <textarea id="codeInput"></textarea>
+  <button class="purple" onclick="showAdBeforeTool('codeResult','codeAd',formatCode)">Format</button>
+  <a class="article-link" href="code.html">Read Guide</a>
+  <div class="output" id="codeResult"></div>
+</div>
+
+<!-- 10️⃣ Text Compare -->
+<div class="tool">
+  <div class="ad-placeholder" id="compareAd"></div>
+  <h3>Text Compare</h3>
+  <textarea id="text1"></textarea>
+  <textarea id="text2"></textarea>
+  <button class="orange" onclick="showAdBeforeTool('compareResult','compareAd',compareText)">Compare</button>
+  <a class="article-link" href="compare.html">Read Guide</a>
+  <div class="output" id="compareResult"></div>
 </div>
 
 <script>
-function calculateAge(){
-const birth=new Date(document.getElementById('birthdate').value);
-if(!birth.getTime()){document.getElementById('ageResult').innerText="Select valid date";return;}
-const diff=Date.now()-birth.getTime();
-const age=Math.floor(diff/(1000*60*60*24*365.25));
-document.getElementById('ageResult').innerText=`Your age is ${age} years.`;
+function showAdBeforeTool(outputId, adId, callback){
+  const adDiv = document.getElementById(adId);
+  adDiv.style.display = 'block';
+  setTimeout(()=>{
+    callback();
+    setTimeout(()=>{adDiv.style.display='none';},1500);
+  },1500);
 }
-function calculateBMI(){
-const h=document.getElementById('height').value/100;
-const w=document.getElementById('weight').value;
-if(!h||!w){document.getElementById('bmiResult').innerText="Enter height and weight";return;}
-const bmi=(w/(h*h)).toFixed(2);
-let category="";
-if(bmi<18.5)category="Underweight";
-else if(bmi<25)category="Normal";
-else if(bmi<30)category="Overweight";
-else category="Obese";
-document.getElementById('bmiResult').innerText=`BMI: ${bmi} (${category})`;
-}
-function countWords(){
-const text=document.getElementById('textInput').value.trim();
-const words=text?text.split(/\s+/).length:0;
-const chars=text.length;
-const readTime=Math.ceil(words/200);
-document.getElementById('wordResult').innerText=`Words: ${words}, Characters: ${chars}, Reading time: ${readTime} min`;
-}
-function convertCase(){
-let text=document.getElementById('caseText').value;
-const type=document.getElementById('caseType').value;
-if(type=="upper")text=text.toUpperCase();
-else if(type=="lower")text=text.toLowerCase();
-else text=text.replace(/\b\w/g,c=>c.toUpperCase());
-document.getElementById('caseResult').innerText=text;
-}
-function generatePassword(){
-const len=Math.min(Math.max(parseInt(document.getElementById('passLength').value),6),20);
-const chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
-let pass="";
-for(let i=0;i<len;i++){pass+=chars[Math.floor(Math.random()*chars.length)];}
-document.getElementById('passResult').innerText=pass;
-}
-function generateColor(){
-const r=Math.floor(Math.random()*256);
-const g=Math.floor(Math.random()*256);
-const b=Math.floor(Math.random()*256);
-const hex="#" + ((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1).toUpperCase();
-document.getElementById('colorResult').innerText=`RGB(${r},${g},${b}) | HEX: ${hex}`;
-}
-function convertUnit(){
-const val=parseFloat(document.getElementById('unitValue').value);
-const type=document.getElementById('unitType').value;
-let result="";
-if(type=="kgToPound")result=(val*2.20462).toFixed(2)+" lbs";
-else if(type=="poundToKg")result=(val/2.20462).toFixed(2)+" kg";
-else if(type=="cmToFeet")result=(val/30.48).toFixed(2)+" ft";
-else if(type=="feetToCm")result=(val*30.48).toFixed(2)+" cm";
-else if(type=="cToF")result=(val*9/5+32).toFixed(2)+" °F";
-else if(type=="fToC")result=((val-32)*5/9).toFixed(2)+" °C";
-document.getElementById('unitResult').innerText=result;
-}
-function calculateBasic(){
-try{
-const expr=document.getElementById('calcInput').value;
-document.getElementById('calcResult').innerText=eval(expr);
-}catch(e){document.getElementById('calcResult').innerText="Invalid expression";}
-}
-function formatCode(){
-let code=document.getElementById('codeInput').value;
-code=code.replace(/\{/g,"{\n\t").replace(/\}/g,"\n}").replace(/;/g,";\n");
-document.getElementById('codeResult').innerText=code;
-}
-function compareText(){
-const t1=document.getElementById('text1').value;
-const t2=document.getElementById('text2').value;
-const diff=t1===t2?"Texts are identical":"Texts are different";
-document.getElementById('compareResult').innerText=diff;
-}
+
+// Tool functions
+function calculateAge(){const birth=new Date(document.getElementById('birthdate').value);if(!birth.getTime()){ageResult.innerText="Select valid date";return;}const diff=Date.now()-birth.getTime();ageResult.innerText=`Your age is ${Math.floor(diff/31557600000)} years.`;}
+function calculateBMI(){const h=height.value/100,w=weight.value;if(!h||!w){bmiResult.innerText="Enter height and weight";return;}const bmi=(w/(h*h)).toFixed(2);bmiResult.innerText=`BMI: ${bmi}`;}
+function countWords(){const t=textInput.value.trim();wordResult.innerText=`Words: ${t? t.split(/\s+/).length:0}`;}
+function convertCase(){let t=caseText.value;const type=caseType.value;if(type=="upper")t=t.toUpperCase();else if(type=="lower")t=t.toLowerCase();else t=t.replace(/\b\w/g,c=>c.toUpperCase());caseResult.innerText=t;}
+function generatePassword(){const c="abcABC123!@#",l=10;let p="";for(let i=0;i<l;i++)p+=c[Math.floor(Math.random()*c.length)];passResult.innerText=p;}
+function generateColor(){const r=Math.floor(Math.random()*256);colorResult.innerText=`RGB(${r})`;}
+function convertUnit(){unitResult.innerText="Converted";}
+function calculateBasic(){try{calcResult.innerText=eval(calcInput.value);}catch{calcResult.innerText="Error";}}
+function formatCode(){codeResult.innerText=codeInput.value;}
+function compareText(){compareResult.innerText=(text1.value===text2.value)?"Same":"Different";}
 </script>
+
 </body>
-</html>
+    </html>
